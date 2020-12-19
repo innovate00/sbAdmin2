@@ -6,5 +6,6 @@ window._config = {
     },
     api: {
         invokeUrl: 'https://kpk5g7pdbf.execute-api.us-east-2.amazonaws.com/prod/deposit-error' // e.g. https://rc7nyt4tql.execute-api.us-west-2.amazonaws.com/prod,
+    ,   deposit: 'https://kpk5g7pdbf.execute-api.us-east-2.amazonaws.com/prod'
     }
 };
