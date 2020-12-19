@@ -4,6 +4,7 @@ var WildRydes = window.WildRydes || {};
 
 (function scopeWrapper($) {
     var signinUrl = 'login.html';
+    var loginSucUrl = 'Deposit.html';
 
     var poolData = {
         UserPoolId: _config.cognito.userPoolId,
@@ -132,7 +133,7 @@ var WildRydes = window.WildRydes || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Logged In');
-                window.location.href = 'Deposit.html';
+                window.location.href = loginSucUrl;
             },
             function signinError(err) {
                 alert(err);
