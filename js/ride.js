@@ -52,14 +52,15 @@ WildRydes.map = WildRydes.map || {};
         
         $.ajax({
             method: 'POST',
-            url: _config.api.deposit + '/deposit-search',
+            url: _config.api.invokeUrl + '/deposit',
             headers: {
                 Authorization: authToken
             },
             data: JSON.stringify({
-                
-                
-
+                PickupLocation: {
+                    Latitude: '11',
+                    Longitude: '22'
+                }
             }),
             contentType: 'application/json',
             success: completeRequest,
@@ -69,6 +70,7 @@ WildRydes.map = WildRydes.map || {};
                 alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
             }
         });
+        
     }
 
     function completeRequest(result) {

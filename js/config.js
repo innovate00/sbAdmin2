@@ -5,7 +5,6 @@ window._config = {
         region: 'us-east-2' // e.g. us-east-2
     },
     api: {
-        invokeUrl: 'https://kpk5g7pdbf.execute-api.us-east-2.amazonaws.com/prod/deposit-error' // e.g. https://rc7nyt4tql.execute-api.us-west-2.amazonaws.com/prod,
-    ,   deposit: 'https://kpk5g7pdbf.execute-api.us-east-2.amazonaws.com/prod'
+        invokeUrl: 'https://1bda1a08sk.execute-api.us-east-2.amazonaws.com/prod' // e.g. https://rc7nyt4tql.execute-api.us-west-2.amazonaws.com/prod,
     }
 };
