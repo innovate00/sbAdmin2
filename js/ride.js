@@ -49,7 +49,13 @@ WildRydes.map = WildRydes.map || {};
 
     function FN001(e) {
         e.preventDefault();
+        for(var i = 0 ; i < 5 ; i++){
+            FN002(e);
+        }
         
+    }
+
+    function FN002(e) {
         $.ajax({
             method: 'POST',
             url: _config.api.invokeUrl + '/deposit',
@@ -57,10 +63,7 @@ WildRydes.map = WildRydes.map || {};
                 Authorization: authToken
             },
             data: JSON.stringify({
-                PickupLocation: {
-                    Latitude: '11',
-                    Longitude: '22'
-                }
+                
             }),
             contentType: 'application/json',
             success: completeRequest,
@@ -70,7 +73,6 @@ WildRydes.map = WildRydes.map || {};
                 alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
             }
         });
-        
     }
 
     function completeRequest(result) {
