@@ -107,7 +107,7 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
+                <!-- Begin Page Content ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
@@ -126,7 +126,7 @@
                             <br/><br/><br/><br/><br/>                            
 
                             <div style="text-align: right;">
-                                <a id="btn_deposit_search" href="#" class="btn btn-success btn-icon-split">
+                                <a id="btn_Deposit_search" href="#" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-check"></i>
                                     </span>
@@ -137,7 +137,7 @@
                     </div>
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- /.container-fluid ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
             </div>
             <!-- End of Main Content -->
@@ -205,23 +205,14 @@
                 _thisPage.init();
             }, 
             bind: function() {
-                // btn_deposit_search 버튼 이벤트 바인드
-                $("#btn_deposit_search").on('click', function(e) {
+                // btn_Deposit_search 버튼 이벤트 바인드
+                $("#btn_Deposit_search").on('click', function(e) {
                     _thisPage.FN001(e);
                 });
             },
             init: function() {
                 console.log("Deposit [ globalAuthToken ] : " + globalAuthToken);
-                // 로그인 O
-                if (globalAuthToken) {
-                    $("#btn_logoutOpen").css('display', '');
-                    $("#btn_loginMove").css('display', 'none');
-                // 로그인 X
-                } else {
-                    $("#btn_logoutOpen").css('display', 'none');
-                    $("#btn_loginMove").css('display', '');
-                    window.location = "login.html";
-                }
+                
             },
             FN001: function(e) {
                 e.preventDefault();

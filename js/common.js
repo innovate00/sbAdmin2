@@ -46,6 +46,18 @@ var userPool;
             },
             postLoad: function(){
 
+                // 로그인 O
+                if( $("#btn_logoutOpen").length > 0 && $("#btn_loginMove").length > 0 ){
+                    if (globalAuthToken) {
+                        $("#btn_logoutOpen").css('display', '');
+                        $("#btn_loginMove").css('display', 'none');
+                    // 로그인 X
+                    } else {
+                        $("#btn_logoutOpen").css('display', 'none');
+                        $("#btn_loginMove").css('display', '');
+                    }
+                }
+
                 // logout버튼 이벤트 바인드
                 $("#btn_logout").on('click', function(e) {
                     userPool.getCurrentUser().signOut();
