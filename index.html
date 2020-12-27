@@ -67,7 +67,7 @@
             </li>
 
             <!-- Left Hide [S] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-            <!--
+            <div class="div_For_local" style="display: none;">
             <br/><br/><br/><br/><br/><br/>
             
             <li class="nav-item active">
@@ -152,7 +152,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
-            -->
+            </div>
             <!-- Left Hide [E] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
             <!-- Divider -->
@@ -469,6 +469,11 @@
                 _thisPage.init();
             }, 
             bind: function() {
+                // css view
+                if(_env == "local") {
+                    $(".div_For_local").css('display', '');
+                }
+
                 // logout버튼 이벤트 바인드
                 $("#btn_logout").on('click', function(e) {
                     WildRydes.signOut();
