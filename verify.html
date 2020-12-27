@@ -71,7 +71,69 @@
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
     <script src="js/vendor/amazon-cognito-identity.min.js"></script>
     <script src="js/config.js"></script>
-    <script src="js/cognito-auth.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" defer="defer">
+        var _thisPage = {
+            onload: function() {
+                _thisPage.bind();
+                _thisPage.init();
+            }, 
+            bind: function() {
+                
+                // Verify버튼 이벤트 바인드
+                $("#btn_Verify").on('click', function(e) {
+                    _thisPage.FN001(e);
+                });
+
+                // codeInputVerify 엔터 이벤트 바인드
+                $("#codeInputVerify").on('keydown', function(e) {
+                    if( e.keyCode == 13 ){
+                        _thisPage.FN001(e);
+                    }
+                });
+
+            },
+            init: function() {
+                console.log("login [ globalAuthToken ] : " + globalAuthToken);
+                
+            },
+            /**
+             * 등록버튼 클릭 이벤트
+             **/
+            FN001: function(event) {
+                var email = $('#emailInputVerify').val();
+                var code = $('#codeInputVerify').val();
+                event.preventDefault();
+                _thisPage.FN002(email, code,
+                    function verifySuccess(result) {
+                        console.log('call result: ' + result);
+                        console.log('Successfully verified');
+                        alert('Verification successful. You will now be redirected to the login page.');
+                        window.location.href = 'login.html';
+                    },
+                    function verifyError(err) {
+                        alert(err);
+                    }
+                );
+            },
+            FN002: function(email, code, onSuccess, onFailure) {
+                _thisPage.FN003(email).confirmRegistration(code, true, function confirmCallback(err, result) {
+                    if (!err) {
+                        onSuccess(result);
+                    } else {
+                        onFailure(err);
+                    }
+                });
+            },
+            FN003: function(email) {
+                return new AmazonCognitoIdentity.CognitoUser({
+                    Username: email,
+                    Pool: userPool
+                });
+            }
+        }
+
+    </script>
 
 </body>
 

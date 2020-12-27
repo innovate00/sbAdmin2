@@ -24,13 +24,13 @@ WildRydes.map = WildRydes.map || {};
     // Register click handler for #request button
     $(function onDocReady() {
 
-        WildRydes.authToken.then(function updateAuthMessage(token) {
-            if (token) {
-                //displayUpdate('You are authenticated. Click to see your <a href="#authTokenModal" data-toggle="modal">auth token</a>.');
-                //$('.authToken').text(token);
-                console.log('>>>>>>> token 확인 모달 생략함.');
-            }
-        });
+        // WildRydes.authToken.then(function updateAuthMessage(token) {
+        //     if (token) {
+        //         //displayUpdate('You are authenticated. Click to see your <a href="#authTokenModal" data-toggle="modal">auth token</a>.');
+        //         //$('.authToken').text(token);
+        //         console.log('>>>>>>> token 확인 모달 생략함.');
+        //     }
+        // });
 
         // logout버튼 이벤트 바인드
         $("#btn_logout").on('click', function(e) {

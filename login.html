@@ -102,7 +102,62 @@
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
     <script src="js/vendor/amazon-cognito-identity.min.js"></script>
     <script src="js/config.js"></script>
-    <script src="js/cognito-auth.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" defer="defer">
+        var _thisPage = {
+            onload: function() {
+                _thisPage.bind();
+                _thisPage.init();
+            }, 
+            bind: function() {
+                // login버튼 이벤트 바인드
+                $("#btn_login").on('click', function(e) {
+                    //handleSignin(e);
+                    _thisPage.FN001(e);
+                });
+
+                // password 엔터 이벤트 바인드
+                $("#passwordInputSignin").on('keydown', function(e) {
+                    if( e.keyCode == 13 ){
+                        _thisPage.FN001(e);
+                    }
+                });
+            },
+            init: function() {
+                console.log("login [ globalAuthToken ] : " + globalAuthToken);
+                
+            },
+            /**
+             * 로그인 버튼 클릭 이벤트
+             **/
+            FN001: function(e) {
+                var email = $('#emailInputSignin').val();
+                var password = $('#passwordInputSignin').val();
+                event.preventDefault();
+
+                var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+                    Username: email,
+                    Password: password
+                });
+
+                var cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+                    Username: email,
+                    Pool: userPool
+                });
+
+                cognitoUser.authenticateUser(authenticationDetails, {
+                    onSuccess: function(){
+                        window.location.href = 'Deposit.html';
+                    },
+                    onFailure: function(err){
+                        alert(err);
+                    }
+                });
+            },
+
+        }
+
+    </script>
 
 </body>
 

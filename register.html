@@ -104,8 +104,91 @@
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
     <script src="js/vendor/amazon-cognito-identity.min.js"></script>
     <script src="js/config.js"></script>
-    <script src="js/cognito-auth.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" defer="defer">
+        var _thisPage = {
+            onload: function() {
+                _thisPage.bind();
+                _thisPage.init();
+            }, 
+            bind: function() {
+                
+                // 등록버튼 이벤트 바인드
+                $("#btn_regist").on('click', function(e) {
+                    // handleRegister(e);
+                    _thisPage.FN001(e);
+                });
 
+                // passwordInputRegister 엔터 이벤트 바인드
+                $("#passwordInputRegister").on('keydown', function(e) {
+                    if( e.keyCode == 13 ){
+                        _thisPage.FN001(e);
+                    }
+                });
+
+                // password2InputRegister 엔터 이벤트 바인드
+                $("#password2InputRegister").on('keydown', function(e) {
+                    if( e.keyCode == 13 ){
+                        _thisPage.FN001(e);
+                    }
+                });
+
+            },
+            init: function() {
+                console.log("login [ globalAuthToken ] : " + globalAuthToken);
+                
+            },
+            /**
+             * 등록버튼 클릭 이벤트
+             **/
+            FN001: function(event) {
+                var email = $('#emailInputRegister').val();
+                var password = $('#passwordInputRegister').val();
+                var password2 = $('#password2InputRegister').val();
+
+                var onSuccess = function registerSuccess(result) {
+                    var cognitoUser = result.user;
+                    console.log('user name is ' + cognitoUser.getUsername());
+                    var confirmation = ('Registration successful. Please check your email inbox or spam folder for your verification code.');
+                    if (confirmation) {
+                        window.location.href = 'verify.html';
+                    }
+                };
+
+                var onFailure = function registerFailure(err) {
+                    alert(err);
+                };
+
+                event.preventDefault();
+
+                if (password === password2) {
+                    //register(email, password, onSuccess, onFailure);
+                    _thisPage.FN002(email, password, onSuccess, onFailure);
+                } else {
+                    alert('Passwords do not match');
+                }
+            },
+            FN002: function(email, password, onSuccess, onFailure) {
+                var dataEmail = {
+                    Name: 'email',
+                    Value: email
+                };
+                var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+
+                userPool.signUp(email, password, [attributeEmail], null,
+                    function signUpCallback(err, result) {
+                        if (!err) {
+                            onSuccess(result);
+                        } else {
+                            onFailure(err);
+                        }
+                    }
+                );
+            }
+
+        }
+
+    </script>
 </body>
 
 </html>

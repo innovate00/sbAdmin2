@@ -3,6 +3,7 @@
 var WildRydes = window.WildRydes || {};
 
 (function scopeWrapper($) {
+    
     var signinUrl = 'login.html';
     var loginSucUrl = 'Deposit.html';
 
@@ -71,18 +72,18 @@ var WildRydes = window.WildRydes || {};
         );
     }
 
-    function signin(email, password, onSuccess, onFailure) {
-        var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
-            Username: email,
-            Password: password
-        });
+    // function signin(email, password, onSuccess, onFailure) {
+    //     var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+    //         Username: email,
+    //         Password: password
+    //     });
 
-        var cognitoUser = createCognitoUser(email);
-        cognitoUser.authenticateUser(authenticationDetails, {
-            onSuccess: onSuccess,
-            onFailure: onFailure
-        });
-    }
+    //     var cognitoUser = createCognitoUser(email);
+    //     cognitoUser.authenticateUser(authenticationDetails, {
+    //         onSuccess: onSuccess,
+    //         onFailure: onFailure
+    //     });
+    // }
 
     function verify(email, code, onSuccess, onFailure) {
         createCognitoUser(email).confirmRegistration(code, true, function confirmCallback(err, result) {
@@ -106,40 +107,41 @@ var WildRydes = window.WildRydes || {};
      */
 
     $(function onDocReady() {
-        $('#signinForm').submit(handleSignin);
-        $('#registrationForm').submit(handleRegister);
-        $('#verifyForm').submit(handleVerify);
+        
+        // $('#signinForm').submit(handleSignin);
+        // $('#registrationForm').submit(handleRegister);
+        // $('#verifyForm').submit(handleVerify);
 
-        // 등록버튼 이벤트 바인드
-        $("#btn_regist").on('click', function(e) {
-            handleRegister(e);
-        });
+        // // 등록버튼 이벤트 바인드
+        // $("#btn_regist").on('click', function(e) {
+        //     handleRegister(e);
+        // });
 
-        // Verify버튼 이벤트 바인드
-        $("#btn_Verify").on('click', function(e) {
-            handleVerify(e);
-        });
+        // // Verify버튼 이벤트 바인드
+        // $("#btn_Verify").on('click', function(e) {
+        //     handleVerify(e);
+        // });
 
-        // login버튼 이벤트 바인드
-        $("#btn_login").on('click', function(e) {
-            handleSignin(e);
-        });
+        // // login버튼 이벤트 바인드
+        // $("#btn_login").on('click', function(e) {
+        //     handleSignin(e);
+        // });
     });
 
-    function handleSignin(event) {
-        var email = $('#emailInputSignin').val();
-        var password = $('#passwordInputSignin').val();
-        event.preventDefault();
-        signin(email, password,
-            function signinSuccess() {
-                console.log('Successfully Logged In');
-                window.location.href = loginSucUrl;
-            },
-            function signinError(err) {
-                alert(err);
-            }
-        );
-    }
+    // function handleSignin(event) {
+    //     var email = $('#emailInputSignin').val();
+    //     var password = $('#passwordInputSignin').val();
+    //     event.preventDefault();
+    //     signin(email, password,
+    //         function signinSuccess() {
+    //             console.log('Successfully Logged In');
+    //             window.location.href = loginSucUrl;
+    //         },
+    //         function signinError(err) {
+    //             alert(err);
+    //         }
+    //     );
+    // }
 
     function handleRegister(event) {
         var email = $('#emailInputRegister').val();

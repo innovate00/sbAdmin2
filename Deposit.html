@@ -197,8 +197,63 @@
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
     <script src="js/vendor/amazon-cognito-identity.min.js"></script>
     <script src="js/config.js"></script>
-    <script src="js/cognito-auth.js"></script>
-    <script src="js/ride.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" defer="defer">
+        var _thisPage = {
+            onload: function() {
+                _thisPage.bind();
+                _thisPage.init();
+            }, 
+            bind: function() {
+                // btn_deposit_search 버튼 이벤트 바인드
+                $("#btn_deposit_search").on('click', function(e) {
+                    _thisPage.FN001(e);
+                });
+            },
+            init: function() {
+                console.log("Deposit [ globalAuthToken ] : " + globalAuthToken);
+                // 로그인 O
+                if (globalAuthToken) {
+                    $("#btn_logoutOpen").css('display', '');
+                    $("#btn_loginMove").css('display', 'none');
+                // 로그인 X
+                } else {
+                    $("#btn_logoutOpen").css('display', 'none');
+                    $("#btn_loginMove").css('display', '');
+                    window.location = "login.html";
+                }
+            },
+            FN001: function(e) {
+                e.preventDefault();
+                for(var i = 0 ; i < 5 ; i++){
+                    _thisPage.FN002(e);
+                }
+            },
+            FN002: function(e) {
+                $.ajax({
+                    method: 'POST',
+                    url: _config.api.invokeUrl + '/deposit',
+                    headers: {
+                        Authorization: globalAuthToken
+                    },
+                    data: JSON.stringify({
+                        
+                    }),
+                    contentType: 'application/json',
+                    success: _thisPage.FN003,
+                    error: function ajaxError(jqXHR, textStatus, errorThrown) {
+                        console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
+                        console.error('Response: ', jqXHR.responseText);
+                        alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
+                    }
+                });
+            },
+            FN003: function(result) {
+                console.log('Response received from API: ', result);
+            }
+        }
+
+    </script>
 
 </body>
 

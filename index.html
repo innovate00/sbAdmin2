@@ -47,7 +47,7 @@
                 </a>
                 <div id="depositPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Deposit.html">Deposit</a>
+                        <a class="collapse-item" href="./Deposit.html">Deposit</a>
                     </div>
                 </div>
             </li>
@@ -61,7 +61,7 @@
                 </a>
                 <div id="exchangePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Exchange.html">Exchange</a>
+                        <a class="collapse-item" href="./Exchange.html">Exchange</a>
                     </div>
                 </div>
             </li>
@@ -469,8 +469,36 @@
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
     <script src="js/vendor/amazon-cognito-identity.min.js"></script>
     <script src="js/config.js"></script>
-    <script src="js/cognito-auth.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" defer="defer">
+        var _thisPage = {
+            onload: function() {
+                _thisPage.bind();
+                _thisPage.init();
+            }, 
+            bind: function() {
+                // logout버튼 이벤트 바인드
+                $("#btn_logout").on('click', function(e) {
+                    WildRydes.signOut();
+                    alert("You have been signed out.");
+                    window.location = "login.html";
+                });
+            },
+            init: function() {
+                console.log("index [ globalAuthToken ] : " + globalAuthToken);
+                // 로그인 O
+                if (globalAuthToken) {
+                    $("#btn_logoutOpen").css('display', '');
+                    $("#btn_loginMove").css('display', 'none');
+                // 로그인 X
+                } else {
+                    $("#btn_logoutOpen").css('display', 'none');
+                    $("#btn_loginMove").css('display', '');
+                }
+            }
+        }
+
+    </script>
 
 </body>
 
