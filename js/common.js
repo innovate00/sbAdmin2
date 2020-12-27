@@ -1,3 +1,6 @@
+var env = "local";
+if(window.location.href.indexOf("master.dc095ee9q9gji.amplifyapp.com") != -1) env = "prd";
+
 var globalAuthToken;
 
 if (!(_config.cognito.userPoolId 
