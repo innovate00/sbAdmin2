@@ -63,14 +63,25 @@ var userPool;
 
                 // logout버튼 이벤트 바인드
                 $("#btn_logout").on('click', function(e) {
-                    userPool.getCurrentUser().signOut();
-                    //alert("You have been signed out.");
-                    window.location = "login.html";
+                    _gf.FN001(e);
                 });
 
                 _thisPage.onload();
 
             },
+            /**
+             * 로그아웃 클릭 이벤트
+             * @param {f} e 
+             */
+            FN001: function(e) {
+                try{
+                    userPool.getCurrentUser().signOut();    
+                } catch(err) {
+                    console.log("_gf.FN001[err] >>> "+err);
+                    globalAuthToken = "";
+                }
+                window.location = "login.html";
+            }
         };
 
         _gf.preLoad();
